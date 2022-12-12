@@ -14,6 +14,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.lime,
         accentColor: Colors.greenAccent,
         fontFamily: "Quicksand",
+        textTheme: ThemeData.light().textTheme.copyWith(
+              titleLarge: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18),
+            ),
         appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
                 headline6: TextStyle(
@@ -37,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
   //String titleInput;
 
   final List<Transaction> _useTransaction = [
-    Transaction(
+    /* Transaction(
       id: 't1',
       title: 'Shoes',
       amount: 71.22,
@@ -48,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
       title: 'Bills',
       amount: 97.12,
       date: DateTime.now(),
-    ),
+    ), */
   ];
 
   void _addNewTransaction(String txTitle, double txAmount) {
