@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'Expense Tracker',
       theme: ThemeData(
         primarySwatch: Colors.lime,
+        //errorColor: Colors.red,
         accentColor: Colors.greenAccent,
         fontFamily: "Quicksand",
         textTheme: ThemeData.light().textTheme.copyWith(
@@ -67,12 +68,13 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  void _addNewTransaction(String txTitle, double txAmount) {
+  void _addNewTransaction(
+      String txTitle, double txAmount, DateTime choosenDate) {
     final newTx = Transaction(
       id: DateTime.now().toString(),
       title: txTitle,
       amount: txAmount,
-      date: DateTime.now(),
+      date: choosenDate,
     );
     setState(() {
       _useTransaction.add(newTx);
@@ -90,6 +92,14 @@ class _MyHomePageState extends State<MyHomePage> {
         );
       },
     );
+  }
+
+  void _deleteTransaction(String id) {
+    setState(() {
+      _useTransaction.removeWhere((tx) {
+        return tx.id == id;
+      });
+    });
   }
 
   @override
@@ -113,7 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Chart(_recentTransactions),
-            TransactionList(_useTransaction),
+            TransactionList(_useTransaction, _deleteTransaction),
           ],
         ),
       ),
